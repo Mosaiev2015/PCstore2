@@ -1,0 +1,36 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<DisplayViewModel>
+
+@Styles.Render("~/Content/advertisement")
+
+<h3 align="center">@ViewData["Title"]</h3>
+
+<div class="container">
+
+    @foreach (var display in Model)
+    {
+        <div class="row">
+            <a class="list-group-item clearfix" href="@Url.Action("Display", "Device",  new { display.Id }, null)">
+                <div class="col-md-3">
+                    <img class="media-object" src="~/Images/image8.png" width="120">
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Size: </strong>@display.Size "</p>
+                    <p><strong>Resolution: </strong>@display.Resolution</p>
+                    <p><strong>Type: </strong>@display.Type</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Colors: </strong>@display.Colors</p>
+                    <p><strong>Price: </strong>@display.Price €</p>
+                    <p><strong>Posted On: </strong>@Html.DisplayFor(x => display.PostedOn)</p>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+<div align="center">
+    @Html.PagedListPager(Model, page => Url.Action("Displays", new { page }))
+</div>

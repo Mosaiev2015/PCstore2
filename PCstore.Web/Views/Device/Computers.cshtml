@@ -1,0 +1,43 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<ComputerViewModel>
+
+@Styles.Render("~/Content/advertisement")
+
+<h3 align="center">@ViewData["Title"]</h3>
+
+<div class="container">
+
+    @foreach (var computer in Model)
+    {
+        <div class="row">
+            <a class="list-group-item clearfix" href="@Url.Action("Computer", "Device",  new { computer.Id }, null)">
+                <div class="col-md-3">
+                    <img class="media-object" src="~/Images/image4.png" width="120">
+                </div>
+                <div class="col-md-3">
+                    <p><strong>CPU: </strong>@computer.CPU</p>
+                    <p><strong>CPU Speed: </strong>@computer.CpuSpeed Ghz</p>
+                    <p><strong>RAM: </strong>@computer.RAM GB</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>RAM Type: </strong>@computer.RamType</p>
+                    <p><strong>HDD: </strong>@computer.HDD GB</p>
+                    <p><strong>GPU: </strong>@computer.GPU</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>GPU Memory: </strong>@computer.GpuMemory GB</p>
+                    <p><strong>Price: </strong>@computer.Price €</p>
+                    <p>
+                        <strong>Posted On: </strong>@Html.DisplayFor(x => computer.PostedOn)
+                    </p>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+<div align="center">
+    @Html.PagedListPager(Model, page => Url.Action("Computers", new { page }))
+</div>

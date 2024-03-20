@@ -1,0 +1,10 @@
+version: 1.0.{build}
+services:
+- mssql2016
+before_deploy:
+- PowerShell .\InstallSelfSignedCert.ps1
+before_build:
+- cmd: nuget restore
+build:
+  project: PCstore.sln
+  verbosity: minimal
